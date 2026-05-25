@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ExaudiApps">
+        <activity
+            android:name=".Message.tutorial.TutorialMessageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Home.Pertemuan10.TenthActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashScreenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pertemuan5.VideoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pertemuan5.WebViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pertemuan5.FifthActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pertemuan7.SevenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pertemuan6.AuthActivity"
+            android:exported="false" /> <!-- SplashScreenActivity sebagai LAUNCHER -->
+        <activity
+            android:name=".BaseActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ExaudiApps">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Home.pertemuan_9.NinthActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pertemuan4.FourthActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pertemuan3.ThirdResultctivity"
+            android:exported="false" />
+        <activity
+            android:name=".pertemuan2.SecondActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pertemuan3.ThidActivity"
+            android:exported="false" />
+    </application>
+
+</manifest>
