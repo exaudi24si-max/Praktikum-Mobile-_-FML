@@ -10,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
+import androidx.lifecycle.lifecycleScope
+import com.example.exaudiapps.data.api.CatFactApiClient
 import com.example.exaudiapps.databinding.FragmentHomeBinding
 import com.example.exaudiapps.pertemuan2.SecondActivity
 import com.example.exaudiapps.pertemuan3.ThidActivity
@@ -20,6 +22,7 @@ import com.example.exaudiapps.pertemuan7.SevenActivity
 import com.example.exaudiapps.Home.pertemuan_9.NinthActivity
 import com.example.exaudiapps.Home.Pertemuan10.TenthActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
@@ -29,19 +32,27 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        /** Ganti menjadi versi binding */
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val sharedPref = requireContext().getSharedPreferences("user_pref", MODE_PRIVATE)
 
-        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
-            title = "Home"
+        // Setup Toolbar secara aman
+        val activity = activity
+        if (activity is AppCompatActivity) {
+            activity.setSupportActionBar(binding.toolbar)
+            activity.supportActionBar?.title = "Home"
+        }
+
+        // Memanggil fungsi loadCatFact saat pertama kali fragment dibuat
+        loadCatFact()
+
+        binding.btnRefresh.setOnClickListener {
+            loadCatFact()
         }
 
         binding.btnP2.setOnClickListener {
@@ -83,13 +94,29 @@ class HomeFragment : Fragment() {
                     }
                     requireActivity().finish()
                     dialog.dismiss()
-                    Log.e("Info Dialog", "Anda memilih Ya!")
-
                 }
+                .setNegativeButton("Batal", null)
                 .show()
         }
-
     }
 
+    private fun loadCatFact() {
+        // PERBAIKAN: Menggunakan viewLifecycleOwner agar proses otomatis berhenti saat pindah halaman
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                // PERBAIKAN: Menggunakan _binding? untuk menghindari NullPointerException
+                _binding?.tvCatFact?.text = "Loading cat fact..."
+                val response = CatFactApiClient.apiService.getCatFact()
+                _binding?.tvCatFact?.text = "\"${response.fact}\""
+            } catch (e: Exception) {
+                _binding?.tvCatFact?.text = "Gagal mengambil fakta kucing."
+                Log.e("Retrofit Error", e.message.toString())
+            }
+        }
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
