@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:gravity="center"
-        android:text="Arahkan ke QR Code"
+        android:text="Arahkan ke QR Codenya"
         android:textColor="@android:color/white"
         android:background="#80000000"
         android:padding="8dp"
