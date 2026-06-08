@@ -179,6 +179,21 @@
             app:layout_constraintTop_toBottomOf="@+id/btnP9" />
 
         <Button
+            android:id="@+id/btnP13"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="50dp"
+            android:backgroundTint="#2196F3"
+            android:text="Pertemuan 13"
+            android:textColor="@color/white"
+            app:cornerRadius="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnP10" />
+
+        <Button
             android:id="@+id/bntLogout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -189,7 +204,7 @@
             app:cornerRadius="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnP10" />
+            app:layout_constraintTop_toBottomOf="@+id/btnP13" />
 
         <TextView
             android:id="@+id/tvCatFact"

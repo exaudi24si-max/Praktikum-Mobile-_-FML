@@ -21,6 +21,7 @@ import com.example.exaudiapps.pertemuan6.AuthActivity
 import com.example.exaudiapps.pertemuan7.SevenActivity
 import com.example.exaudiapps.Home.pertemuan_9.NinthActivity
 import com.example.exaudiapps.Home.Pertemuan10.TenthActivity
+import com.example.exaudiapps.Home.Pertemuan13.ThirteenthActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
 
@@ -82,6 +83,9 @@ class HomeFragment : Fragment() {
         }
         binding.btnP10.setOnClickListener {
             startActivity(Intent(requireContext(), TenthActivity::class.java))
+        }
+        binding.btnP13.setOnClickListener {
+            startActivity(Intent(requireContext(), ThirteenthActivity::class.java))
         }
         binding.bntLogout.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
