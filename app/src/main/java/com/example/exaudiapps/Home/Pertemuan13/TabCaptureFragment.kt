@@ -3,7 +3,6 @@ package com.example.exaudiapps.Home.Pertemuan13
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -14,9 +13,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.example.exaudiapps.databinding.FragmentTabCaptureBinding
+import com.example.exaudiapps.utils.PermissionHelper
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -58,17 +57,13 @@ class TabCaptureFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnCapture.setOnClickListener {
-            if (hasCameraPermission()) {
-                openCamera()
+            if (!PermissionHelper.hasPermission(requireContext(), Manifest.permission.CAMERA)) {
+                PermissionHelper.requestPermission(permissionLauncher, Manifest.permission.CAMERA)
             } else {
-                permissionLauncher.launch(Manifest.permission.CAMERA)
+                openCamera()
             }
         }
     }
-
-    private fun hasCameraPermission() = ContextCompat.checkSelfPermission(
-        requireContext(), Manifest.permission.CAMERA
-    ) == PackageManager.PERMISSION_GRANTED
 
     private fun openCamera() {
         val photoFile = createImageFile()
